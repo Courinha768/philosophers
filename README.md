@@ -1,7 +1,9 @@
 # Philosophers
 
-You will have to write one program for the mandatory part and one for the bonus part
-but they will have the same basic rules:
+In this project, you will learn the basics of threading a process.
+You will see how to create threads and you will discover mutexes.
+
+## Rules
 
 - This project is to be coded in C, following the Norm. Any leak, crash, undefined
   behavior, or norm error means 0 to the project.
