@@ -15,25 +15,16 @@ void	my_putnbr(int n)
 	}
 }
 
-void	put_time(int n)
+void	putmsg(int type, t_philo philo)
 {
-	if (n / 60 < 10)
-		write(1, "0", 1);
-	my_putnbr(n / 60);
-	write(1, ":", 1);
-	if (n % 60 < 10)
-		write(1, "0", 1);
-	my_putnbr(n % 60);
-}
+	struct timeval	tv;
+	int				time;
+	int				tstart;
 
-void	putmsg(int type, t_philo philo, long int tstart)
-{
-	//struct timeval	tv;
-	//int				time;
-
-	// gettimeofday(&tv, NULL);
-	// time = tv.tv_usec - tstart;
-	// put_time(time);
+	tstart = stime();
+	gettimeofday(&tv, NULL);
+	time = tv.tv_usec - tstart;
+	my_putnbr(time);
 	(void)tstart;
 	write(1, " ", 1);
 	my_putnbr(philo.index);

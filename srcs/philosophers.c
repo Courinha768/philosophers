@@ -1,52 +1,5 @@
 #include "../includes/philosophers.h"
 
-void	pickup_forks(t_philo *philo)
-{
-	pthread_mutex_lock(philo->left_fork);
-	putmsg(1, *philo, 100000);
-	pthread_mutex_lock(philo->rght_fork);
-	putmsg(1, *philo, 100000);
-}
-
-void	eat(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->mutex);
-	if (!philo->finish)
-		putmsg(2, *philo, 10000);
-	usleep(philo->args.time_to_eat);
-	pthread_mutex_unlock(philo->rght_fork);
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_unlock(&philo->mutex);
-}
-
-void	sleeping(t_philo *philo)
-{
-	putmsg(3, *philo, 100000);
-	usleep(philo->args.time_to_sleep);
-}
-
-void	thinking(t_philo *philo)
-{
-	putmsg(4, *philo, 100000);
-}
-
-void	*routine(void *philo_void)
-{
-	t_philo			philo;
-
-	philo = *(t_philo *)philo_void;
-	if (!(philo.index % 2))
-		usleep(philo.args.time_to_eat);
-	while (!philo.finish)
-	{
-		pickup_forks(&philo);
-		eat(&philo);
-		sleeping(&philo);
-		thinking(&philo);
-	}
-	return (NULL);
-}
-
 t_philo	*create_forks(t_philo *philo, t_args args)
 {
 	int				i;
@@ -75,8 +28,8 @@ t_philo	*create_forks(t_philo *philo, t_args args)
 
 t_philo	*init_philo(t_args args)
 {
-	int		i;
-	t_philo	*philo;
+	int				i;
+	t_philo			*philo;
 
 	i = -1;
 	philo = (t_philo *)malloc(sizeof(t_philo) * args.nbr_of_philo);
@@ -99,6 +52,7 @@ void	run_philo(t_args args)
 	int		outp;
 
 	philo = init_philo(args);
+	stime();
 	i = -1;
 	outp = 0;
 	while (++i < args.nbr_of_philo)

@@ -36,29 +36,42 @@ typedef struct	s_info {
 /*                              PHILOSOPHERS.C                                */
 /* ========================================================================== */
 
-t_philo	*create_forks(t_philo *philo, t_args args);
+t_philo		*create_forks(t_philo *philo, t_args args);
+t_philo		*init_philo(t_args args);
+void		run_philo(t_args args);
+
+/* ========================================================================== */
+/*                                 ROUTINE                                    */
+/* ========================================================================== */
+
+void		pickup_forks(t_philo *philo);
+void		eat(t_philo *philo);
+void		sleeping(t_philo *philo);
+void		thinking(t_philo *philo);
+void		*routine(void *philo_void);
 
 /* ========================================================================== */
 /*                                  UTILS                                     */
 /* ========================================================================== */
 
-int		my_atoi(char *str);
-void	define_args(t_args *args, int ac, char **av);
-void	my_putstr(char *str, int fd);
+int			my_atoi(char *str);
+void		define_args(t_args *args, int ac, char **av);
+void		my_putstr(char *str, int fd);
+long int	stime(void);
 
 /* ========================================================================== */
 /*                                  ERROS                                     */
 /* ========================================================================== */
 
-int		error_handler(int ac, char **av);
-int		write_error(int	type);
-int		check_args_isdigit(int ac, char **av);
+int			error_handler(int ac, char **av);
+int			write_error(int	type);
+int			check_args_isdigit(int ac, char **av);
 
 /* ========================================================================== */
 /*                                   MSGS                                     */
 /* ========================================================================== */
 
-void	putmsg(int	type, t_philo philo, long int tstart);
-void	my_putnbr(int n);
+void		putmsg(int	type, t_philo philo);
+void		my_putnbr(int n);
 
 #endif

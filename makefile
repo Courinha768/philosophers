@@ -11,10 +11,10 @@ CFLAGS		=	-Wall -Werror -Wextra -g -fsanitize=address
 .c.o		:
 	@${CC} ${CFLAGS} ${HEAD} -c $< -o ${<:.c=.o}
 
-$(NAME)		:	${OBJS}
+$(NAME)		:	credit ${OBJS} compile
 	@${CC} ${CFLAGS} ${FLAGS} ${OBJS} -o ${NAME}
 
-all			:	credit ${NAME}
+all			: ${NAME}
 
 clean		:
 	@rm -rf ${OBJS}
@@ -41,4 +41,10 @@ credit:
 	@echo "                                                    ██"
 	@echo "         Made with love by : \033[1;91mCourinha\033[m              ▀▀▀▀"
 
+compile		:
+	@echo "\e[1m\nCompiling\033[0m : putmsg.c				\e[1mDone\033[0m"
+	@echo "\e[1mCompiling\033[0m : philosophers.c			\e[1mDone\033[0m"
+	@echo "\e[1mCompiling\033[0m : philosophers_utils.c		\e[1mDone\033[0m"
+	@echo "\e[1mCompiling\033[0m : error_handler.c			\e[1mDone\033[0m"
+	@echo "\nCompiling is \e[1mcomplete\033[0m"
 .PHONY		:	all clean fclean re

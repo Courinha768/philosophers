@@ -47,3 +47,16 @@ void	define_args(t_args *args, int ac, char **av)
 			args->eat_amount = my_atoi(av[5]);
 	}
 }
+
+long int	stime(void)
+{
+	static long int stime;
+	struct timeval	tv;
+
+	if (!stime)
+	{
+		gettimeofday(&tv, NULL);
+		stime = tv.tv_usec;
+	}
+	return (stime);
+}
