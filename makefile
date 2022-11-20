@@ -14,7 +14,7 @@ CFLAGS		=	-Wall -Werror -Wextra -g -fsanitize=address
 $(NAME)		:	${OBJS}
 	@${CC} ${CFLAGS} ${FLAGS} ${OBJS} -o ${NAME}
 
-all			:	${NAME}
+all			:	credit ${NAME}
 
 clean		:
 	@rm -rf ${OBJS}
@@ -31,5 +31,14 @@ re			:	fclean all
 # 	--track-fds=yes \
 # 	--errors-for-leak-kinds=all \
 # 	--show-leak-kinds=all ./so_long	maps/map1.ber
+
+credit:
+	@echo "▀██▀▀█▄  ▀██       ██  ▀██                                  ▀██"
+	@echo " ██   ██  ██ ▄▄   ▄▄▄   ██    ▄▄▄    ▄▄▄▄    ▄▄▄   ▄▄▄ ▄▄▄   ██ ▄▄     ▄▄▄▄  ▄▄▄ ▄▄   ▄▄▄▄"
+	@echo " ██▄▄▄█▀  ██▀ ██   ██   ██  ▄█  ▀█▄ ██▄ ▀  ▄█  ▀█▄  ██▀  ██  ██▀ ██  ▄█▄▄▄██  ██▀ ▀▀ ██▄ ▀"
+	@echo " ██       ██  ██   ██   ██  ██   ██ ▄ ▀█▄▄ ██   ██  ██    █  ██  ██  ██       ██     ▄ ▀█▄▄"
+	@echo "▄██▄     ▄██▄ ██▄ ▄██▄ ▄██▄  ▀█▄▄█▀ █▀▄▄█▀  ▀█▄▄█▀  ██▄▄▄▀  ▄██▄ ██▄  ▀█▄▄▄▀ ▄██▄    █▀▄▄█▀"
+	@echo "                                                    ██"
+	@echo "         Made with love by : \033[1;91mCourinha\033[m              ▀▀▀▀"
 
 .PHONY		:	all clean fclean re

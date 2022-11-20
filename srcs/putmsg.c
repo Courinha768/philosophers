@@ -15,15 +15,28 @@ void	my_putnbr(int n)
 	}
 }
 
-void	putmsg(int type, t_philo *philo, int tstart)
+void	put_time(int n)
 {
-	struct timeval	tv;
-	int				time;
+	if (n / 60 < 10)
+		write(1, "0", 1);
+	my_putnbr(n / 60);
+	write(1, ":", 1);
+	if (n % 60 < 10)
+		write(1, "0", 1);
+	my_putnbr(n % 60);
+}
 
-	time = gettimeofday(&tv, NULL) - tstart;
-	my_putnbr(time);
+void	putmsg(int type, t_philo philo, long int tstart)
+{
+	//struct timeval	tv;
+	//int				time;
+
+	// gettimeofday(&tv, NULL);
+	// time = tv.tv_usec - tstart;
+	// put_time(time);
+	(void)tstart;
 	write(1, " ", 1);
-	my_putnbr(philo->index);
+	my_putnbr(philo.index);
 	if (type == 1)
 		my_putstr(" has taken a fork\n", 1);
 	if (type == 2)
