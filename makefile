@@ -49,5 +49,6 @@ compile		:
 	@echo "\e[1mCompiling\033[0m : philosophers_utils.c		\e[1mDone\033[0m"
 	@echo "\e[1mCompiling\033[0m : error_handler.c			\e[1mDone\033[0m"
 	@echo "\e[1mCompiling\033[0m : routine.c				\e[1mDone\033[0m"
-	@echo "\nCompiling is \e[1mcomplete\033[0m"
+	@echo "\e[1mCompiling\033[0m : main.c				\e[1mDone\033[0m"
+	@echo "\nCompilation is \e[1mcomplete\033[0m"
 .PHONY		:	all clean fclean re

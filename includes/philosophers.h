@@ -19,7 +19,7 @@ typedef struct	s_philo {
 	pthread_t		th;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*rght_fork;
-	pthread_mutex_t	mutex;
+	pthread_mutex_t	*mutex;
 	t_args			args;
 	int				index;
 	int				finish;
@@ -65,6 +65,7 @@ void				my_usleep(int time);
 int					my_atoi(char *str);
 void				my_putstr(char *str, int fd);
 long unsigned int	stime(void);
+pthread_mutex_t		*smutex(void);
 
 /* ========================================================================== */
 /*                                  ERROR                                     */

@@ -6,7 +6,7 @@
 /*   By: aappleto <aappleto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 19:55:10 by aappleto          #+#    #+#             */
-/*   Updated: 2022/11/27 19:56:33 by aappleto         ###   ########.fr       */
+/*   Updated: 2022/11/27 21:10:21 by aappleto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,17 @@ long unsigned int	stime(void)
 		stime = my_gettimeofday();
 	}
 	return (stime);
+}
+
+pthread_mutex_t	*smutex(void)
+{
+	static pthread_mutex_t	mutex;
+	static int				a;
+
+	if (!a)
+	{
+		pthread_mutex_init(&mutex, NULL);
+		a = 1;
+	}
+	return (&mutex);
 }

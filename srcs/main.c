@@ -6,7 +6,7 @@
 /*   By: aappleto <aappleto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 19:54:57 by aappleto          #+#    #+#             */
-/*   Updated: 2022/11/27 19:55:35 by aappleto         ###   ########.fr       */
+/*   Updated: 2022/11/27 21:03:53 by aappleto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int ac, char **av)
 	if (error_handler(ac, av))
 		return (0);
 	define_args(&args, ac, av);
+	smutex();
 	run_philosophers(args);
 	return (0);
 }
