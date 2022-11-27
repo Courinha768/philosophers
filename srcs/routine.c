@@ -6,7 +6,7 @@
 /*   By: aappleto <aappleto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 19:55:08 by aappleto          #+#    #+#             */
-/*   Updated: 2022/11/27 20:46:30 by aappleto         ###   ########.fr       */
+/*   Updated: 2022/11/27 21:29:11 by aappleto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	eat(t_philo *philo)
 	static long unsigned int	last_meal;
 
 	if (last_meal)
-		if ((int)(my_gettimeofday() - last_meal) > philo->args.time_to_die)
+		if ((int)(my_gettimeofday() - last_meal) > \
+		philo->args.time_to_die - philo->args.time_to_eat)
 			philo->finish = 1;
 	last_meal = my_gettimeofday();
 	if (!philo->finish)
@@ -67,8 +68,11 @@ void	*routine(void *philo_void)
 	{
 		pickup_forks(&philo);
 		eat(&philo);
-		sleeping(&philo);
-		thinking(&philo);
+		if (!philo.finish)
+		{
+			sleeping(&philo);
+			thinking(&philo);
+		}
 	}
 	if (philo.finish)
 	{
