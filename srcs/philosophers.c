@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aappleto <aappleto@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/27 19:55:00 by aappleto          #+#    #+#             */
+/*   Updated: 2022/11/27 19:55:33 by aappleto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philosophers.h"
 
 t_philo	*create_forks(t_philo *philo, t_args args)
@@ -6,52 +18,54 @@ t_philo	*create_forks(t_philo *philo, t_args args)
 	int				size;
 	pthread_mutex_t	*forks;
 
-	i = 0;
 	size = sizeof(pthread_mutex_t) * args.nbr_of_philo;
 	forks = (pthread_mutex_t *)malloc(size);
 	if (!forks)
 		return (NULL);
-	while (i < 3)
-	{
+	i = -1;
+	while (++i < args.nbr_of_philo)
 		pthread_mutex_init(&forks[i], NULL);
-		pthread_mutex_init(&(philo[i].mutex), NULL);
+	i = -1;
+	while (++i < args.nbr_of_philo)
+	{
 		if (i == 0)
 			philo[i].left_fork = &forks[args.nbr_of_philo - 1];
 		else
 			philo[i].left_fork = &forks[i - 1];
 		philo[i].rght_fork = &forks[i];
-		i++;
 	}
 	free(forks);
 	return (philo);
 }
 
-t_philo	*init_philo(t_args args)
+t_philo	*init_philosophers(t_args args)
 {
-	int				i;
-	t_philo			*philo;
+	t_philo	*p;
+	int		i;
 
-	i = -1;
-	philo = (t_philo *)malloc(sizeof(t_philo) * args.nbr_of_philo);
-	if (!philo)
+	p = (t_philo *)malloc(sizeof(t_philo) * args.nbr_of_philo);
+	if (!p)
 		return (NULL);
+	i = -1;
 	while (++i < args.nbr_of_philo)
 	{
-		philo[i].index = i + 1;
-		philo[i].args = args;
-		philo[i].finish = 0;
+		p[i].index = i + 1;
+		p[i].args = args;
+		p[i].finish = 0;
 	}
-	philo = create_forks(philo, args);
-	return (philo);
+	p = create_forks(p, args);
+	pthread_mutex_unlock(p[0].left_fork);
+	pthread_mutex_unlock(p[1].left_fork);
+	return (p);
 }
 
-void	run_philo(t_args args)
+void	run_philosophers(t_args args)
 {
 	t_philo	*philo;
 	int		i;
 	int		outp;
 
-	philo = init_philo(args);
+	philo = init_philosophers(args);
 	stime();
 	i = -1;
 	outp = 0;
@@ -69,15 +83,4 @@ void	run_philo(t_args args)
 			return ;
 	}
 	free(philo);
-}
-
-int	main(int ac, char **av)
-{
-	t_args		args;
-
-	if (error_handler(ac, av))
-		return (0);
-	define_args(&args, ac, av);
-	run_philo(args);
-	return (0);
 }

@@ -18,9 +18,11 @@ all			: ${NAME}
 
 clean		:
 	@rm -rf ${OBJS}
+	@echo "\e[1mObject files deleted\033[0m"
 
 fclean		:	clean
 	@rm -rf ${NAME}
+	@echo "\e[1mExecutable file deleted\033[0m"
 
 re			:	fclean all
 
@@ -30,21 +32,22 @@ re			:	fclean all
 # 	--show-reachable=yes \
 # 	--track-fds=yes \
 # 	--errors-for-leak-kinds=all \
-# 	--show-leak-kinds=all ./so_long	maps/map1.ber
+# 	--show-leak-kinds=all
 
 credit:
 	@echo "▀██▀▀█▄  ▀██       ██  ▀██                                  ▀██"
-	@echo " ██   ██  ██ ▄▄   ▄▄▄   ██    ▄▄▄    ▄▄▄▄    ▄▄▄   ▄▄▄ ▄▄▄   ██ ▄▄     ▄▄▄▄  ▄▄▄ ▄▄   ▄▄▄▄"
-	@echo " ██▄▄▄█▀  ██▀ ██   ██   ██  ▄█  ▀█▄ ██▄ ▀  ▄█  ▀█▄  ██▀  ██  ██▀ ██  ▄█▄▄▄██  ██▀ ▀▀ ██▄ ▀"
+	@echo " ██   ██  ██ ▄▄   ▄▄▄   ██    ▄▄▄    ▄▄▄▄▄   ▄▄▄   ▄▄▄ ▄▄▄   ██ ▄▄     ▄▄▄▄  ▄▄▄ ▄▄   ▄▄▄▄▄"
+	@echo " ██▄▄▄█▀  ██▀ ██   ██   ██  ▄█  ▀█▄ ██▄  ▀ ▄█  ▀█▄  ██▀  ██  ██▀ ██  ▄█▄▄▄██  ██▀ ▀▀ ██▄  ▀"
 	@echo " ██       ██  ██   ██   ██  ██   ██ ▄ ▀█▄▄ ██   ██  ██    █  ██  ██  ██       ██     ▄ ▀█▄▄"
 	@echo "▄██▄     ▄██▄ ██▄ ▄██▄ ▄██▄  ▀█▄▄█▀ █▀▄▄█▀  ▀█▄▄█▀  ██▄▄▄▀  ▄██▄ ██▄  ▀█▄▄▄▀ ▄██▄    █▀▄▄█▀"
 	@echo "                                                    ██"
-	@echo "         Made with love by : \033[1;91mCourinha\033[m              ▀▀▀▀"
+	@echo "         Made by : \033[1;91mCourinha\033[m 		           ▀▀▀▀"
 
 compile		:
 	@echo "\e[1m\nCompiling\033[0m : putmsg.c				\e[1mDone\033[0m"
 	@echo "\e[1mCompiling\033[0m : philosophers.c			\e[1mDone\033[0m"
 	@echo "\e[1mCompiling\033[0m : philosophers_utils.c		\e[1mDone\033[0m"
 	@echo "\e[1mCompiling\033[0m : error_handler.c			\e[1mDone\033[0m"
+	@echo "\e[1mCompiling\033[0m : routine.c				\e[1mDone\033[0m"
 	@echo "\nCompiling is \e[1mcomplete\033[0m"
 .PHONY		:	all clean fclean re
