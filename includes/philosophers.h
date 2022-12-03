@@ -16,13 +16,14 @@ typedef struct	s_args {
 }	t_args;
 
 typedef struct	s_philo {
-	pthread_t		th;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*rght_fork;
-	pthread_mutex_t	*mutex;
-	t_args			args;
-	int				index;
-	int				finish;
+	pthread_t			th;
+	pthread_mutex_t		*left_fork;
+	pthread_mutex_t		*rght_fork;
+	pthread_mutex_t		*mutex;
+	t_args				args;
+	int					index;
+	int					finish;
+	long unsigned int	last_meal;
 }	t_philo;
 
 typedef struct	s_info {

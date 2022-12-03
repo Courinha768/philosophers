@@ -6,7 +6,7 @@
 /*   By: aappleto <aappleto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 19:55:00 by aappleto          #+#    #+#             */
-/*   Updated: 2022/11/27 20:44:34 by aappleto         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:07:02 by aappleto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_philo	*init_philosophers(t_args args)
 		p[i].index = i + 1;
 		p[i].args = args;
 		p[i].finish = 0;
+		p[i].last_meal = 0;
 	}
 	p = create_forks(p, args);
 	pthread_mutex_unlock(p[0].left_fork);
