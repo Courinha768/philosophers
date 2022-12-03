@@ -6,7 +6,7 @@
 /*   By: aappleto <aappleto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 19:54:49 by aappleto          #+#    #+#             */
-/*   Updated: 2022/11/27 19:55:38 by aappleto         ###   ########.fr       */
+/*   Updated: 2022/12/03 18:01:25 by aappleto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,21 @@ int	check_args_isdigit(int ac, char **av)
 	return (0);
 }
 
+int	print_one(int time_to_die)
+{
+	(void)time_to_die;
+	printf("0     1 has taken a fork\n");
+	printf("%-5d 1 died\n", time_to_die);
+	return (1);
+}
+
 int	error_handler(int ac, char **av)
 {
 	if (ac != 5 && ac != 6)
 		return (write_error(1));
 	if (check_args_isdigit(ac, av))
 		return (write_error(2));
+	if (my_atoi(av[1]) == 1)
+		return (print_one(my_atoi(av[2])));
 	return (0);
 }

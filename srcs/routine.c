@@ -6,7 +6,7 @@
 /*   By: aappleto <aappleto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 19:55:08 by aappleto          #+#    #+#             */
-/*   Updated: 2022/12/03 17:26:21 by aappleto         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:30:24 by aappleto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	*routine(void *philo_void)
 	t_philo			philo;
 
 	philo = *(t_philo *)philo_void;
+	if (philo.index % 2)
+		my_usleep(philo.args.time_to_eat);
 	while (!philo.finish && philo.args.eat_amount--)
 	{
 		pickup_forks(&philo);
