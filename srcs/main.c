@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aappleto <aappleto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fmeira <fmeira@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 19:54:57 by aappleto          #+#    #+#             */
-/*   Updated: 2022/11/27 21:03:53 by aappleto         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:02:45 by fmeira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
+
+void	eat(t_philo *philo)
+{
+	putmsg(2, *philo);
+	philo->last_meal = my_gettimeofday();
+	if (philo->args.time_to_eat > philo->args.time_to_die)
+	{
+		my_usleep(philo->args.time_to_die);
+		philo->finish = 1;
+	}
+	else
+	{
+		my_usleep(philo->args.time_to_eat);
+		pthread_mutex_unlock(philo->rght_fork);
+		pthread_mutex_unlock(philo->left_fork);
+	}
+}
 
 void	define_args(t_args *args, int ac, char **av)
 {

@@ -6,7 +6,7 @@
 /*   By: aappleto <aappleto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 19:54:49 by aappleto          #+#    #+#             */
-/*   Updated: 2022/12/03 18:01:25 by aappleto         ###   ########.fr       */
+/*   Updated: 2022/12/04 16:00:58 by aappleto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	write_error(int type)
 		write(2, "Incorrect number of arguments\n", 31);
 	if (type == 2)
 		write(2, "All arguments should be numbers\n", 33);
+	if (type == 3)
+		write(2, "Number of philosophers should be greater then 0\n", 49);
 	return (1);
 }
 
@@ -53,5 +55,7 @@ int	error_handler(int ac, char **av)
 		return (write_error(2));
 	if (my_atoi(av[1]) == 1)
 		return (print_one(my_atoi(av[2])));
+	if (my_atoi(av[1]) < 1)
+		return (write_error(3));
 	return (0);
 }

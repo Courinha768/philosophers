@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmeira <fmeira@student.42lisboa.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/04 17:06:04 by fmeira            #+#    #+#             */
+/*   Updated: 2022/12/04 17:41:12 by fmeira           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <pthread.h>
-#include <sys/time.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <pthread.h>
+# include <sys/time.h>
 
-typedef struct	s_args {
+typedef struct s_args {
 	int	nbr_of_philo;
 	int	time_to_die;
 	int	time_to_eat;
@@ -15,7 +27,7 @@ typedef struct	s_args {
 	int	eat_amount;
 }	t_args;
 
-typedef struct	s_philo {
+typedef struct s_philo {
 	pthread_t			th;
 	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*rght_fork;
@@ -26,7 +38,7 @@ typedef struct	s_philo {
 	long unsigned int	last_meal;
 }	t_philo;
 
-typedef struct	s_info {
+typedef struct s_info {
 	t_philo			*philo;
 	t_args			args;
 	struct timeval	tstart;
@@ -51,7 +63,7 @@ t_philo				*init_philosophers(t_args args);
 /*                                 ROUTINE                                    */
 /* ========================================================================== */
 
-void				pickup_forks(t_philo *philo);
+void				pickup_forks(t_philo *philo, int i);
 void				eat(t_philo *philo);
 void				sleeping(t_philo *philo);
 void				thinking(t_philo *philo);
@@ -73,14 +85,14 @@ pthread_mutex_t		*smutex(void);
 /* ========================================================================== */
 
 int					error_handler(int ac, char **av);
-int					write_error(int	type);
+int					write_error(int type);
 int					check_args_isdigit(int ac, char **av);
 
 /* ========================================================================== */
 /*                                   MSGS                                     */
 /* ========================================================================== */
 
-void				putmsg(int	type, t_philo philo);
+void				putmsg(int type, t_philo philo);
 void				my_putnbr(int n);
 
 #endif

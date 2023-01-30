@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aappleto <aappleto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fmeira <fmeira@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 19:55:08 by aappleto          #+#    #+#             */
-/*   Updated: 2022/12/03 17:30:24 by aappleto         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:03:05 by fmeira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-void	pickup_forks(t_philo *philo)
+void	agora_fica_certo(t_philo *philo)
 {
-	if ((int)(my_gettimeofday() - philo->last_meal) > philo->args.time_to_die)
-		philo->finish = 1;
 	philo->last_meal = my_gettimeofday();
 	if (!philo->finish)
 	{
@@ -36,13 +34,23 @@ void	pickup_forks(t_philo *philo)
 	}
 }
 
-void	eat(t_philo *philo)
+void	pickup_forks(t_philo *philo, int i)
 {
-	putmsg(2, *philo);
-	philo->last_meal = my_gettimeofday();
-	my_usleep(philo->args.time_to_eat);
-	pthread_mutex_unlock(philo->rght_fork);
-	pthread_mutex_unlock(philo->left_fork);
+	if ((int)(my_gettimeofday() - philo->last_meal) > philo->args.time_to_die)
+		philo->finish = 1;
+	if (i == 1)
+	{
+		if (philo->args.time_to_die < 2 * philo ->args.time_to_eat)
+		{
+			my_usleep(philo->args.time_to_die - \
+			philo->args.time_to_eat - philo->args.time_to_sleep);
+			philo->finish = 1;
+		}
+	}
+	else
+	{
+		agora_fica_certo(philo);
+	}
 }
 
 void	sleeping(t_philo *philo)
@@ -71,19 +79,22 @@ void	thinking(t_philo *philo)
 void	*routine(void *philo_void)
 {
 	t_philo			philo;
+	int				i;
 
+	i = 0;
 	philo = *(t_philo *)philo_void;
 	if (philo.index % 2)
 		my_usleep(philo.args.time_to_eat);
 	while (!philo.finish && philo.args.eat_amount--)
 	{
-		pickup_forks(&philo);
+		pickup_forks(&philo, i);
 		if (!philo.finish)
 		{
 			eat(&philo);
 			sleeping(&philo);
 			thinking(&philo);
 		}
+		i++;
 	}
 	if (philo.finish)
 	{
